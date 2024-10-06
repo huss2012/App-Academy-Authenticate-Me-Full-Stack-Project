@@ -5,6 +5,7 @@ const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { environment } = require('./config');
+const routes = require('./routes');
 
 const isProduction = environment === 'production';
 
@@ -35,3 +36,12 @@ app.use(
     })
 );
 //--------------------------------------------------------------------------------------------------------------
+//------------------Define API end points to the app to use-----------------------------------------------------
+app.use(routes);
+//--------------------------------------------------------------------------------------------------------------
+//--------------Define error handler middlewares----------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------
+
+
+
+module.exports = app
