@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { environment } = require('./config');
 const routes = require('./routes');
+const { ValidationError } = require("sequelize");
 
 const isProduction = environment === 'production';
 
@@ -39,7 +40,34 @@ app.use(
 //------------------Define API end points to the app to use-----------------------------------------------------
 app.use(routes);
 //--------------------------------------------------------------------------------------------------------------
-//--------------Define error handler middlewares----------------------------------------------------------------
+//--------------Setup error handler middlewares-----------------------------------------------------------------
+//1.Not Found Error-Handler:
+app.use((_req, _res, next) => {
+    const err = new Error("The requested resource couldn't be found.");
+    err.title = "Resource Not Found";
+    err.errors = ["The requested resource coudn't be found."];
+    err.status = 404;
+    next(err);
+});
+//2.Sequelize Error-Handler:
+app.use((err, _req, _res, next) => {
+    if (err instanceof ValidationError) {
+        err.errors = err.errors.map((e) => e.message);
+        err.title = "Validation error";
+    };
+    next(err);
+});
+//3.Error Formatter Error-Handler:
+app.use((err, _res, res, _next) => {
+    res.status(err.status || 500);
+    console.error(err);
+    res.json({
+        title: err.title || 'Server Error',
+        message: err.message,
+        errors: err.errors,
+        stack: isProduction ? null : err.stack
+    });
+});
 //--------------------------------------------------------------------------------------------------------------
 
 
