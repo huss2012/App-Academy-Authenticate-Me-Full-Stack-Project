@@ -6,6 +6,6 @@ router.get('/hello/world', function (req, res) {
     res.cookie('XSRF-TOKEN', req.csrfToken());
     res.send("Hello World!");
 });
-router.use('/api',apiRputer)
+router.use('/api', apiRputer);
 
-module.exports = router
+module.exports = router;
