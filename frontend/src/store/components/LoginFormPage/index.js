@@ -1,7 +1,8 @@
 import { login } from "../../session";
-import React ,{ useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from "react-router-dom";
+import './LoginForm.css';
 
 function LoginFormPage() {
     const dispatch = useDispatch();
@@ -18,37 +19,41 @@ function LoginFormPage() {
         setErrors([]);
         return dispatch(login(credential, password))
             .catch(async (res) => {
-            const data = await res.json();
-            if (data && data.errors) setErrors(data.errors);
-        });
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors);
+            });
 
     };
 
     return (
         <>
-            <h1>Welcom to Login page!</h1>
-            <form onSubmit={handelSubmit}>
-                <ul>
-                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                </ul>
-                <label>username or email</label>
-                <input
-                    type="text"
-                    placeholder="name or email here"
-                    value={credential}
-                    onChange={(e) => setCredential(e.target.value)}
-                    required
-                ></input>
-                <label>password</label>
-                <input
-                    type="text"
-                    placeholder="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                ></input>
-                <button type="submit">Login</button>
-            </form>
+            <div className="login-form-container">
+                <h1 className="login-form-headding">Welcom to Login page!</h1>
+                <form className="login-form" onSubmit={handelSubmit}>
+                    <ul className="login-form-error-list">
+                        {errors.map((error, idx) => <li className="login-form-error-list-item" key={idx}>{error}</li>)}
+                    </ul>
+                    <label className="login-form-lable">username or email:</label>
+                    <input
+                        type="text"
+                        placeholder="name or email here"
+                        value={credential}
+                        className="login-form-input"
+                        onChange={(e) => setCredential(e.target.value)}
+                        required
+                    ></input>
+                    <label className="login-form-lable">password:</label>
+                    <input
+                        type="text"
+                        placeholder="password"
+                        value={password}
+                        className="login-form-input"
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    ></input>
+                    <button className="login-form-submit-button" type="submit">Login</button>
+                </form>
+            </div>
         </>
     )
 }
