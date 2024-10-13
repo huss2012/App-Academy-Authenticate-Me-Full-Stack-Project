@@ -22,12 +22,9 @@ export const login = (credential, password) => async (dispatch) => {
             method: 'POST',
             body: JSON.stringify({ credential, password })
         });
-    if (response.ok) {
-        const data = await response.json();
-        dispatch(setSessionUserAction(data.user));
-        return response;
-    }
-
+    const data = await response.json();
+    dispatch(setSessionUserAction(data.user));
+    return response;
 
 }
 
