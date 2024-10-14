@@ -14,7 +14,7 @@ export const removeSesssionUserAction = () => {
         type: REMOVE_SESSION_USER
     }
 };
-
+//Login thunk action:
 export const login = (credential, password) => async (dispatch) => {
     const response = await csrfFetch(
         '/api/session',
@@ -27,7 +27,7 @@ export const login = (credential, password) => async (dispatch) => {
     return response;
 
 };
-
+//restor user session thunk action for handleing refresh:
 export const restoreUserSession = () => async (dispatch) => {
     const response = await csrfFetch(
         '/api/session'
@@ -36,7 +36,7 @@ export const restoreUserSession = () => async (dispatch) => {
     dispatch(setSessionUserAction(data.user));
     return response;
 };
-
+//Signup thunk action:
 export const singup = (username, email, password) => async (dispatch) => {
     const response = await csrfFetch(
         '/api/users',
@@ -48,6 +48,19 @@ export const singup = (username, email, password) => async (dispatch) => {
     const data = await response.json();
     dispatch(setSessionUserAction(data.user));
     return response;
+};
+//Logout thun action:
+export const logout = () => async (dispatch) => {
+    //hit the DELETE /api/session route:
+    const response = await csrfFetch(
+        '/api/session',
+        {
+            method: "DELETE"
+        }
+    );
+    if (response.ok) {
+        await dispatch(removeSesssionUserAction());
+    }
 };
 
 const intialState = { user: null };
