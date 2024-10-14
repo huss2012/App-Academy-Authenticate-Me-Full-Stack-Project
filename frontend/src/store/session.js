@@ -58,9 +58,8 @@ export const logout = () => async (dispatch) => {
             method: "DELETE"
         }
     );
-    if (response.ok) {
-        await dispatch(removeSesssionUserAction());
-    }
+    dispatch(removeSesssionUserAction());
+    return response;
 };
 
 const intialState = { user: null };
