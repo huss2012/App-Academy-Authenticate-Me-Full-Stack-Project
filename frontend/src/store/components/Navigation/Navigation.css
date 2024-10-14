@@ -1,0 +1,20 @@
+.navigation-list {
+    list-style: none;
+    text-decoration: none;
+    padding: 5px;
+    margin: 25px auto;
+    border-bottom: 0.25px solid black;
+    border-top: 0.25px solid black;
+    /* border-radius: 25px; */
+    width: 90%;
+}
+
+.navigation-list-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    font-size: larger;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
