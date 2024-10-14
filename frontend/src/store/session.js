@@ -37,6 +37,18 @@ export const restoreUserSession = () => async (dispatch) => {
     return response;
 };
 
+export const singup = (username, email, password) => async (dispatch) => {
+    const response = await csrfFetch(
+        '/api/users',
+        {
+            method: "POST",
+            body: JSON.stringify({ username, email, password })
+        }
+    );
+    const data = await response.json();
+    dispatch(setSessionUserAction(data.user));
+    return response;
+};
 
 const intialState = { user: null };
 

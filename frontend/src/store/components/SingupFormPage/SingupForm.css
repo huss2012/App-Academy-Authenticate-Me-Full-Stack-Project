@@ -1,0 +1,53 @@
+.Signup-from-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+    padding: 5vh 10vh;
+    border: 2px solid black;
+    width: 50%;
+    border-radius: 25px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: larger;
+}
+.signup-form-headding {
+    padding: 5px;
+    margin: 5px;
+}
+.signup-form {
+    padding: 15px;
+    margin: 15px;
+    width: 90%;
+    border: 1.5px solid black;
+    border-radius: 25px;
+}
+.signup-form-error-list {
+    list-style: none;
+    color: red;
+    font-style: italic;
+    font-weight: bold;
+}
+.signup-form-lable {
+    display: block;
+    padding: 5px;
+    margin: 0px auto;
+    width: 50%;
+}
+.signup-form-input {
+    display: block;
+    padding: 5px;
+    margin: 0px auto;
+    width: 50%;
+    border: 1px black solid;
+    border-radius: 10px;
+}
+.signup-form-submit-button {
+    display: block;
+    width: 15%;
+    margin: 10px auto;
+    padding: 5px;
+    border: 0.5px solid black;
+    border-radius: 10px;
+
+}
